@@ -10,7 +10,7 @@ class DashboardController extends Controller
     //TODO
 
 
-    
+
     function index(){
         return view("dashboard");
     }

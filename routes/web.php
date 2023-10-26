@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//TODO CATCHALL reroute if not authenticated.
 Route::get('/', function () {
     return view('welcome');
 });
