@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     //TODO
-
-
-
     function index(){
         return view("dashboard");
     }
