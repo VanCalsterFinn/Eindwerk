@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BuildOrderController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -30,6 +32,13 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category/create', [CategoryController::class, 'create']);
+
+Route::get('/build_orders', [BuildOrderController::class, 'index']);
+Route::get('/build_orders/1', [BuildOrderController::class, 'read']);
+Route::get('/build_orders/create', [BuildOrderController::class, 'create']);
 
 Route::get('/inventory', [InventoryController::class, 'index']);
 Route::get('/inventory/create', [InventoryController::class, 'create']);

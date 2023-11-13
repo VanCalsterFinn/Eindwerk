@@ -14,9 +14,14 @@
                     {{ request()->is('inventory') ? 'active' : '' }}">Inventory</a>
                 </li>
                 <li>
-                    <a href="/orders"
+                    <a href="/build_orders"
                         class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
-                    {{ request()->is('orders') ? 'active' : '' }}">Build Orders</a>
+                    {{ request()->is('build_orders') ? 'active' : '' }}">Build Orders</a>
+                </li>
+                <li>
+                    <a href="/category"
+                        class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
+                    {{ request()->is('category') ? 'active' : '' }}">Category</a>
                 </li>
                 <li>
                     <a href="/scan"

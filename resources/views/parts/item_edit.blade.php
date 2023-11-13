@@ -6,7 +6,7 @@
     <div class="flex justify-center flex-col">
         
         <div class="flex justify-between items-center w-full mb-4">
-            <p class="font-bold text-2xl">Add part</p>
+            <p class="font-bold text-2xl">Edit part</p>
         </div>
 
         <div class="flex justify-center flex-col shadow p-4 rounded">
@@ -30,7 +30,7 @@
                             <p class="font-bold">Category: </p>
 
                             <div class="flex">
-                                <a class="p-2 bg-blue-700 text-white cursor-pointer rounded">
+                                <a href="/category/create" class="p-2 bg-blue-700 text-white cursor-pointer rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
                                     </svg>
@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="flex mt-4 hover:opacity-80">
-                    <input type="submit" value="Add" id="add" class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">
+                    <input type="submit" value="Update" id="update" class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">
                 </div>
             </form>
             

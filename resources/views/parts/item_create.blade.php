@@ -6,7 +6,7 @@
     <div class="flex justify-center flex-col">
         
         <div class="flex justify-between items-center w-full mb-4">
-            <p class="font-bold text-2xl">Stock item: 2309124589</p>
+            <p class="font-bold text-2xl">Add part</p>
         </div>
 
         <div class="flex justify-center flex-col shadow p-4 rounded">
@@ -27,16 +27,25 @@
                             <input type="text" class="border-2 border-slate-200 rounded">
                         </div>
                         <div class="flex justify-between items-center">
-                            <p class="font-bold">Status: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Last Updated: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Last Stocktake: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
+                            <p class="font-bold">Category: </p>
+
+                            <div class="flex">
+                                <a href="/category/create" class="p-2 bg-blue-700 text-white cursor-pointer rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                                <select name="category_id" id="">
+                                    <option>Connectors</option>
+                                    <option>Interface</option>
+                                    <option>MCU</option>
+                                    <option>Capacitor</option>
+                                    <option>Inductors</option>
+                                    <option>Relais</option>
+                                    <option>PCB</option>
+                                    <option>PCBA</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="flex justify-between items-center">
                             <p class="font-bold">Location: </p>
@@ -93,7 +102,7 @@
                     </div>
                 </div>
                 <div class="flex mt-4 hover:opacity-80">
-                    <input type="submit" value="Update" id="update" class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">
+                    <input type="submit" value="Add" id="add" class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">
                 </div>
             </form>
             

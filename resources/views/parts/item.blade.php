@@ -17,7 +17,7 @@
 
         <div class="flex justify-center flex-col shadow rounded p-4">
 
-            <img class="w-36 h-36 object-contain shadow mb-4" src="/electrolytic-capacitor.jpg" alt="img">
+            <img class="w-36 h-36 object-cover shadow mb-4" src="/electrolytic-capacitor.jpg" alt="img">
 
             <div class="flex justify-center items-center gap-4">
                 <div class="flex justify-center flex-col gap-4">

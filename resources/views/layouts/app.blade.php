@@ -12,8 +12,7 @@
 <div class="flex justify-center items-center flex-col">
         @yield('topbar')
         @show
-    @show
-    <div class="flex items-center w-full p-4 py-4">
+    <div class="flex items-center w-full">
         {{-- @yield('sidebar')
         @show --}}
         @yield('content')

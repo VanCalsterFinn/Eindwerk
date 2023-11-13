@@ -10,28 +10,28 @@ class InventoryController extends Controller
 {
     //
     function index(){
-        return view("inventory");
+        return view("parts.inventory");
     }
 
     function create(){
-        return view("itemCreate");
+        return view("parts.item_create");
     }
 
     function read(){
         //Pull item from Inventree and show in item page
-        return view("item");
+        return view("parts.item");
     }
 
     function edit(){
         //Pull item from Inventree and show in itemEdit page
-        return view("itemEdit");
+        return view("parts.item_edit");
     }
 
     function delete(){
         //Delete logic here:
 
-        
+
         //Return to the inventory view
-        return redirect("inventory");
+        return redirect("parts.inventory");
     }
 }
