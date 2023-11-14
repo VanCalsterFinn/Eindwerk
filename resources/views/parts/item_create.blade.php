@@ -1,14 +1,13 @@
 @extends('layouts.app')
 @extends('layouts.topbar')
+@extends('layouts.location_banner')
 @section('content')
 
 <div class="flex justify-center items-center flex-col w-full">
-    <div class="flex justify-center flex-col">
-        
-        <div class="flex justify-between items-center w-full mb-4">
-            <p class="font-bold text-2xl">Add part</p>
-        </div>
-
+    <div class="flex justify-between items-center p-4 bg-slate-100 w-full">
+        <p class="font-bold text-2xl">Add part</p>
+    </div>
+    <div class="flex justify-center flex-col p-4">
         <div class="flex justify-center flex-col shadow p-4 rounded">
             <form action="" method="PUT">
                 <div class="flex justify-center items-center gap-4">

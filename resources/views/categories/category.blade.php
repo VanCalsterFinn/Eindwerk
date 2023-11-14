@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.topbar')
+@extends('layouts.location_banner')
 @section('content')
 
 <div class="flex justify-center items-center flex-col w-full">

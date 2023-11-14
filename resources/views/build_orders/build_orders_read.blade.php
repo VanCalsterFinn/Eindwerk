@@ -1,10 +1,12 @@
 @extends('layouts.app')
 @extends('layouts.topbar')
+@extends('layouts.location_banner')
 @section('content')
     <div class="flex justify-center items-center flex-col w-full">
         {{-- Build order banner --}}
         <div class="flex justify-between items-center p-4 bg-slate-100 w-full">
             <p class="font-bold text-xl">Build Order BO0002</p>
+            <a href="" class="bg-blue-700 text-white p-2 rounded">Complete Build</a>
         </div>
 
         {{-- Build order info card --}}
@@ -45,7 +47,7 @@
                 <p class="font-bold text-xl">Allocate Stock to Build</p>
                 <div class="flex justify-center items-center gap-2">
                     <a href="" class="bg-red-700 text-white p-2 rounded">Unallocate Stock</a>
-                    <a href="" class="bg-green-700 text-white p-2 rounded">Allocate Stock</a>
+                    <a href="" class="bg-blue-700 text-white p-2 rounded">Allocate Stock</a>
                 </div>
             </div>
         </div>

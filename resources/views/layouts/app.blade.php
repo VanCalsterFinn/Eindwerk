@@ -12,9 +12,9 @@
 <div class="flex justify-center items-center flex-col">
         @yield('topbar')
         @show
+        @yield('location_banner')
+        @show
     <div class="flex items-center w-full">
-        {{-- @yield('sidebar')
-        @show --}}
         @yield('content')
     </div>
 </div>

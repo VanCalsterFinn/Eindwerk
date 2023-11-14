@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class BuildOrderController extends Controller
 {
+    public $required_parts = [];
+
     //
     public function index(){
         return view("build_orders.build_orders");
