@@ -12,12 +12,20 @@
                 <form action="/build_orders" method="PUT">
                     <div class="flex justify-center items-center gap-4">
 
-                        <div class="flex justify-center flex-col">
+                        <div class="flex justify-center flex-col gap-4">
 
                             <div class="flex justify-center flex-col gap-1">
-                                <p class="font-bold">Category</p>
+                                <p class="font-bold">Name</p>
                                 <input type="text" class="border-2 border-slate-200 rounded">
                             </div>
+                            
+                            <div class="flex justify-center flex-col gap-1">
+                                <p class="font-bold">Description</p>
+                                <input type="text" class="border-2 border-slate-200 rounded">
+                            </div>
+
+
+                            {{-- Required part addition --}}
 
                         </div>
                     </div>

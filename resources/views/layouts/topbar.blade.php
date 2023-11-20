@@ -19,6 +19,11 @@
                     {{ request()->is('build_orders') ? 'active' : '' }}">Build Orders</a>
                 </li>
                 <li>
+                    <a href="/bill_of_material"
+                        class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
+                    {{ request()->is('bill_of_material') ? 'active' : '' }}">BOM</a>
+                </li>
+                <li>
                     <a href="/category"
                         class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
                     {{ request()->is('category') ? 'active' : '' }}">Category</a>

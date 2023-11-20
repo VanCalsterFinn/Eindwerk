@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BomController;
 use App\Http\Controllers\BuildOrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
@@ -39,6 +40,10 @@ Route::get('/category/create', [CategoryController::class, 'create']);
 Route::get('/build_orders', [BuildOrderController::class, 'index']);
 Route::get('/build_orders/1', [BuildOrderController::class, 'read']);
 Route::get('/build_orders/create', [BuildOrderController::class, 'create']);
+
+Route::get('/bill_of_material', [BomController::class, 'index']);
+Route::get('/bill_of_material/1', [BomController::class, 'read']);
+Route::get('/bill_of_material/create', [BomController::class, 'create']);
 
 Route::get('/inventory', [InventoryController::class, 'index']);
 Route::get('/inventory/create', [InventoryController::class, 'create']);
