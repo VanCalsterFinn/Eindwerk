@@ -11,26 +11,25 @@
     <div class="flex justify-center items-center flex-col">
         <div class="flex justify-center items-center flex-col w-1/2 p-4 shadow">
             <p class="text-2xl font-bold">Login</p>
-            <form method="GET" action="/dashboard">
+            <form method="POST" action="login">
                 @csrf 
-                
-                <div class="flex justify-center flex-col mt-4">
+                <div class="flex justify-center flex-col mt-4 form-group">
                     <label for="username">Username</label>
-                    <input id="username" type="text" class="@error('username') is-invalid @enderror shadow">
+                    <input name="username" type="text" class="@error('username') is-invalid @enderror shadow">
                     @error('username')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="text-red">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="flex justify-center flex-col mt-4">
+                <div class="flex justify-center flex-col mt-4 form-group">
                     <label for="password">Password</label>
-                    <input id="password" type="text" class="@error('password') is-invalid @enderror shadow">
+                    <input name="password" type="password" class="@error('password') is-invalid @enderror shadow">
                     @error('password')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="text-red">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="flex mt-4 hover:opacity-80">
+                <div class="flex mt-4 hover:opacity-80 form-group">
                     <input type="submit" value="Login" id="login" class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">
                 </div>
             </form>

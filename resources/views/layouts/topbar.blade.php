@@ -9,9 +9,9 @@
                     {{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/inventory"
+                    <a href="/part"
                         class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
-                    {{ request()->is('inventory') ? 'active' : '' }}">Inventory</a>
+                    {{ request()->is('part') ? 'active' : '' }}">Parts</a>
                 </li>
                 <li>
                     <a href="/build_orders"
@@ -26,7 +26,7 @@
                 <li>
                     <a href="/category"
                         class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
-                    {{ request()->is('category') ? 'active' : '' }}">Category</a>
+                    {{ request()->is('category') ? 'active' : '' }}">Categories</a>
                 </li>
                 <li>
                     <a href="/scan"
@@ -40,7 +40,7 @@
                 </li>
             </ul>
             <div class="flex justify-center items-center hover:opacity-80">
-                <button class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">Logout</button>
+                <a href="/logout"><button class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">Logout</button></a>
             </div>
         </div>
     </div>
