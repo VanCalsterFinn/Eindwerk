@@ -9,7 +9,7 @@
                     {{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/part"
+                    <a href="/part?page=1"
                         class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
                     {{ request()->is('part') ? 'active' : '' }}">Parts</a>
                 </li>

@@ -47,7 +47,7 @@ Route::get('/bill_of_material', [BomController::class, 'index']);
 Route::get('/bill_of_material/1', [BomController::class, 'read']);
 Route::get('/bill_of_material/create', [BomController::class, 'create']);
 
-Route::get('/part', [PartController::class, 'index']);
+Route::get('/part', [PartController::class, 'index'])->name('part.view');
 Route::get('/part/create', [PartController::class, 'create']);
 Route::get('/part/{id}', [PartController::class, 'read']);
 Route::get('/part/{id}/edit', [PartController::class, 'edit']);
