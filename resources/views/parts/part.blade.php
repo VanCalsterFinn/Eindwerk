@@ -4,7 +4,7 @@
 @section('content')
     <div class="flex justify-center items-center flex-col w-full">
         <div class="flex justify-between items-center p-4 bg-slate-100 w-full">
-            <p class="font-bold text-2xl">Inventory</p>
+            <p class="font-bold text-2xl">Parts</p>
             <a href="/part/create" class="p-2 bg-blue-700 text-white cursor-pointer rounded">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd"
@@ -14,11 +14,14 @@
             </a>
         </div>
         <div class="flex justify-center items-center gap-4 mt-4">
-            <form action="">
+            {{-- <form action="">
                 <input type="text" class="shadow p-2 border border-2-black" placeholder="Search">
-                <button type="submit" class=""></button>
-            </form>
-
+                <button type="submit" class="">
+                    <a href="/part?page={{ $page - 1 }}&filter={{ $filter }}&order={{ $order }}" name="search"
+                    class="p-2 bg-blue-700 text-white cursor-pointer rounded">
+                    Search</a>
+                </button>
+            </form> --}}
             <button>
                 <a href="/part?page={{ $page - 1 }}&filter={{ $filter }}&order={{ $order }}" name="page"
                     class="p-2 bg-blue-700 text-white cursor-pointer rounded">
@@ -111,11 +114,11 @@
                         <li class="flex justify-between items-center w-36">
                             <p>Last Stocktake</p>
                             @if ($filter == 'last_stocktake' && $order == 'desc')
-                                <a href="/part?page=1&filter=last_stocktake&order=desc">
+                                <a href="/part?page=1&filter=last_stocktake&order=asc">
                                     <img src="/icons8-sort-down-30.png" alt="" class="w-6 h-6">
                                 </a>
                             @elseif ($filter == 'last_stocktake' && $order == 'asc')
-                                <a href="/part?page=1&filter=last_stocktake&order=asc">
+                                <a href="/part?page=1&filter=last_stocktake&order=desc">
                                     <img src="/icons8-sort-up-30.png" alt="" class="w-6 h-6">
                                 </a>
                             @else
@@ -130,7 +133,7 @@
                     @foreach ($parts as $part)
                         <ul class="flex justify-center items-center gap-14 p-3 border-b border-slate-200 text-sm">
                             <li class="w-36 text-blue-700 cursor-pointer break-words"><a
-                                    href="/part/{{ $part->{'pk'} }}">{{ $part->{'full_name'} }}</a></li>
+                                    href="/part/{{ $part->{'pk'} }}?page=1">{{ $part->{'full_name'} }}</a></li>
                             <li class="w-24 break-words">
                                 @if ($part->{'IPN'} != null)
                                     {{ $part->{'IPN'} }}

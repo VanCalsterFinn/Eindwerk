@@ -33,14 +33,14 @@
                         class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
                     {{ request()->is('scan') ? 'active' : '' }}">Scan</a>
                 </li>
-                <li>
-                    <a href="/printer"
-                        class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
-                    {{ request()->is('printer') ? 'active' : '' }}">Printer</a>
-                </li>
             </ul>
             <div class="flex justify-center items-center hover:opacity-80">
-                <a href="/logout"><button class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">Logout</button></a>
+                @if (session('token') != null)
+                    <a href="/logout"><button class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">Logout</button></a> 
+                @else
+                    <a href="/login"><button class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">Login</button></a>
+                @endif
+                
             </div>
         </div>
     </div>

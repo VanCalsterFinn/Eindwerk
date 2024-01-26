@@ -5,111 +5,106 @@
 
 <div class="flex justify-center items-center flex-col w-full">
     <div class="flex justify-between items-center p-4 bg-slate-100 w-full">
-        <p class="font-bold text-2xl">Add part</p>
+        <p class="font-bold text-2xl">Create Part</p>
     </div>
-    <div class="flex justify-center flex-col p-4">
-        <div class="flex justify-center flex-col shadow p-4 rounded">
-            <form action="" method="PUT">
-                <div class="flex justify-center items-center gap-4">
-
-                    <div class="flex justify-center flex-col gap-4">
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Image: </p>
-                            <input type="file" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Base part: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Quantity: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Category: </p>
-
-                            <div class="flex">
-                                <a href="/category/create" class="p-2 bg-blue-700 text-white cursor-pointer rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </a>
-                                <select name="category_id" id="">
-                                    <option>Connectors</option>
-                                    <option>Interface</option>
-                                    <option>MCU</option>
-                                    <option>Capacitor</option>
-                                    <option>Inductors</option>
-                                    <option>Relais</option>
-                                    <option>PCB</option>
-                                    <option>PCBA</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Location: </p>
-                            <select name="location_id" id="">
-                                <option>R1S1</option>
-                                <option>R1S2</option>
-                                <option>R1S3</option>
-                                <option>R1S4</option>
-                                <option>R1S5</option>
-                                <option>R1S6</option>
-                                <option>R1S7</option>
-                                <option>R1S8</option>
-                                <option>R2S1</option>
-                                <option>R2S2</option>
-                                <option>R2S3</option>
-                                <option>R2S4</option>
-                                <option>R2S5</option>
-                                <option>R2S6</option>
-                                <option>R2S7</option>
-                                <option>R2S8</option>
-                                <option>PrinterS1</option>
-                                <option>PrinterS2</option>
-                                <option>PrinterS3</option>
-                                <option>PrinterS4</option>
-                                <option>PrinterS5</option>
-                            </select>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Packaging: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Manufacturer: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Manufacturer Part: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Supplier: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Supplier Part: </p>
-                            <input type="text" class="border-2 border-slate-200 rounded">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Description: </p>
-                            <textarea class="border-2 border-slate-200 rounded" name="description" cols="40" rows="5"></textarea>
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="flex mt-4 hover:opacity-80">
-                    <input type="submit" value="Add" id="add" class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">
-                </div>
-            </form>
-            
-
+    <form method="POST" action="/part/create" class="w-1/2">
+        @csrf 
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="category">Category *</label>
+            <select name="category" id="category" class="@error('category') is-invalid @enderror shadow">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->{"pk"} }}">{{ $category->{"name"} }}</option>
+                @endforeach
+            </select>
+            @error('category')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
         </div>
 
-    </div>
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="name">Name *</label>
+            <input name="name" type="text" id="name" class="@error('name') is-invalid @enderror shadow">
+            @error('name')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+        </div>
 
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="ipn">IPN</label>
+            <input name="ipn" type="text" id="ipn" placeholder="Internal Part Number" class="@error('ipn') is-invalid @enderror shadow">
+            @error('ipn')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="revision">Revision</label>
+            <input name="revision" type="text" id="revision" placeholder="Part revision or version number"  class="@error('revision') is-invalid @enderror shadow">
+            @error('revision')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="description">Description</label>
+            <input name="description" type="text" id="description" class="@error('description') is-invalid @enderror shadow">
+            @error('description')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="units">Units</label>
+            <input name="units" type="text" id="units" placeholder="Units of measure for this part" class="@error('units') is-invalid @enderror shadow">
+            @error('units')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="link">Link</label>
+            <input name="link" type="text" id="link" placeholder="Link to external URL" class="@error('link') is-invalid @enderror shadow">
+            @error('link')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="default_location">Default Location</label>
+            <select name="default_location" id="default_location" class="@error('default_location') is-invalid @enderror shadow">
+                @foreach ($locations as $location)
+                    <option value="{{ $location->{"pk"} }}">{{ $location->{"name"} }}</option>
+                @endforeach
+            </select>            
+            @error('default_location')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="default_expiry">Default Expiry *</label>
+            <input name="default_expiry" type="text" id="default_expiry" value="0" placeholder="Expiry time (in days) for stock items of this part" class="@error('default_expiry') is-invalid @enderror shadow">
+            @error('default_expiry')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+            <div class="flex items-center gap-4">
+                <label for="max_expiry">Max expiry?</label>
+                <input type="checkbox" name="max_expiry">
+            </div>
+        </div>
+
+        <div class="flex justify-center flex-col mt-4 form-group">
+            <label for="min_stock">Minimum Stock *</label>
+            <input name="min_stock" type="text" id="min_stock" value="0" class="@error('min_stock') is-invalid @enderror shadow">
+            @error('min_stock')
+                <div class="text-red-600">{{ $message }}</div>
+            @enderror
+        </div>
+        
+        <div class="flex mt-4 hover:opacity-80 form-group">
+            <input type="submit" value="Submit" class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">
+        </div>
+    </form>
 </div>
 
 @endsection

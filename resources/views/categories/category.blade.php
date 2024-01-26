@@ -24,25 +24,14 @@
                     <li class="w-60">Description</li>
                     <li class="w-24">Parts</li>
                 </ul>
+                @foreach ($categories as $category)
                 <ul class="flex justify-center items-center gap-14 p-3 border-b border-slate-200">
-                    <li class="w-24">Connectors</li>
-                    <li class="w-60">Connectors, pin headers, etc...</li>
-                    <li class="w-24">2</li>
+                    <li class="w-24">{{ $category->{'name'} }}</li>
+                    <li class="w-60">{{ $category->{'description'} }}</li>
+                    <li class="w-24">{{ $category->{'part_count'} }}</li>
                 </ul>
-                
-                <ul class="flex justify-center items-center gap-14 p-3 border-b border-slate-200">
-                    <li class="w-24">Interface</li>
-                    <li class="w-60">Drivers, Receivers, Transceiver</li>
-                    <li class="w-24">44</li>
-                </ul>
-    
-                <ul class="flex justify-center items-center gap-14 p-3 border-b border-slate-200">
-                    <li class="w-24">Capacitors</li>
-                    <li class="w-60">Capacitors</li>
-                    <li class="w-24">13</li>
-                </ul>
+                @endforeach
             </div>
-    
         </div>
     </div>
 </div>

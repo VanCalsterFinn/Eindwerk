@@ -32,12 +32,12 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
-Route::get('/register', [RegisterController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/category', [CategoryController::class, 'index']);
 Route::get('/category/create', [CategoryController::class, 'create']);
+Route::post('/category/create', [CategoryController::class, 'category_create']);
 
 Route::get('/build_orders', [BuildOrderController::class, 'index']);
 Route::get('/build_orders/{id}', [BuildOrderController::class, 'read']);
@@ -49,10 +49,14 @@ Route::get('/bill_of_material/create', [BomController::class, 'create']);
 
 Route::get('/part', [PartController::class, 'index'])->name('part.view');
 Route::get('/part/create', [PartController::class, 'create']);
-Route::get('/part/{id}', [PartController::class, 'read']);
+Route::post('/part/create', [PartController::class, 'part_create']);
+Route::get('/part/{id}', [PartController::class, 'read'])->name('part_details.view');
+
+Route::get('/part/{id}/add', [PartController::class, 'add_stock_view']);
+Route::post('/part/{id}/add', [PartController::class, 'add_stock']);
+
 Route::get('/part/{id}/edit', [PartController::class, 'edit']);
 Route::get('/part/{id}/delete', [PartController::class, 'delete']);
 
 Route::get('/scan', [ScanController::class, 'index']);
-Route::get('/printer', [PrinterController::class, 'index']);
 Route::get('/orders', [OrderController::class, 'index']);

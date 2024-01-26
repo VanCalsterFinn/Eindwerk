@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://kit.fontawesome.com/f8ced2dcd8.js" crossorigin="anonymous"></script>
-    @vite('resources/css/app.css')
-    <title>Login</title>
-</head>
-<body>
-    <div class="flex justify-center items-center flex-col">
+@extends('layouts.app')
+@extends('layouts.topbar')
+@extends('layouts.location_banner')
+@section('content')
+    <div class="flex justify-center items-center flex-col w-full">
         <div class="flex justify-center items-center flex-col w-1/2 p-4 shadow">
             <p class="text-2xl font-bold">Login</p>
             <form method="POST" action="login">
@@ -34,11 +27,9 @@
                     <input type="submit" value="Login" id="login" class="w-full p-2 bg-blue-700 text-white cursor-pointer rounded">
                 </div>
             </form>
-
-            <div class="flex justify-center items-center mt-2">
+            {{-- <div class="flex justify-center items-center mt-2">
                 <p class="text-sm">Don't have an account? <a href="{{ url('register') }}" class="text-blue-700 cursor-pointer">Register here</a> </p>
-            </div>
+            </div> --}}
         </div>
     </div>
-</body>
-</html>
+@endsection

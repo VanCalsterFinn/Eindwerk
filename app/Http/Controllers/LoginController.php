@@ -14,15 +14,15 @@ class LoginController extends Controller
     }
 
     function logout(Request $request){ 
-        $request->session()->put('token', " ");        
+        $request->session()->put('token', null);        
         return view("login");
     }
 
     function login(Request $request) : RedirectResponse
     {
         $validated = $request->validate([
-            'username' => 'required | max:20',
-            'password' => 'required | max:20',
+            'username' => 'required|max:20',
+            'password' => 'required|max:20',
         ]);
         try{
             // Try obtaining a token with given credentials
