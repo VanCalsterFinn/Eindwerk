@@ -29,6 +29,11 @@
                     {{ request()->is('category') ? 'active' : '' }}">Categories</a>
                 </li>
                 <li>
+                    <a href="/location"
+                        class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
+                    {{ request()->is('location') ? 'active' : '' }}">Locations</a>
+                </li>
+                <li>
                     <a href="/scan"
                         class="flex justify-center items-center cursor-pointer border-b-2 border-transparent hover:border-slate-200 p-2
                     {{ request()->is('scan') ? 'active' : '' }}">Scan</a>

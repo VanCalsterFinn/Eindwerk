@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\PrinterController;
@@ -38,6 +39,10 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/category', [CategoryController::class, 'index']);
 Route::get('/category/create', [CategoryController::class, 'create']);
 Route::post('/category/create', [CategoryController::class, 'category_create']);
+
+Route::get('/location', [LocationController::class, 'index']);
+Route::get('/location/create', [LocationController::class, 'create']);
+Route::post('/location/create', [LocationController::class, 'location_create']);
 
 Route::get('/build_orders', [BuildOrderController::class, 'index']);
 Route::get('/build_orders/{id}', [BuildOrderController::class, 'read']);
