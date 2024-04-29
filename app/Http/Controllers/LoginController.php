@@ -26,7 +26,7 @@ class LoginController extends Controller
         ]);
         try{
             // Try obtaining a token with given credentials
-            $response = Http::withBasicAuth($validated['username'], $validated['password'])->get("http://localhost:8000/api/user/token/");
+            $response = Http::withBasicAuth($validated['username'], $validated['password'])->get("http://inventree.localhost/api/user/token/");
             $obj = json_decode($response);
             $token = $obj->{'token'};
             $request->session()->put('token', $token);

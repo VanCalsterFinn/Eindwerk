@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     //
     public function index(){
-        $response = Http::withToken(session('token'), 'Token')->get("http://localhost:8000/api/part/category/");
+        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/category/");
         $categories = json_decode($response);
         return view("categories.category" ,compact("categories"));
     }
@@ -26,7 +26,7 @@ class CategoryController extends Controller
         ]);
         try{
             // Try obtaining a token with given credentials
-            $response = Http::withToken(session('token'), 'Token')->post("http://localhost:8000/api/part/category/", [
+            $response = Http::withToken(session('token'), 'Token')->post("http://inventree.localhost/api/part/category/", [
                 'name' => $request->name,
                 'description' => $request->description,
                 'parent' => null,
