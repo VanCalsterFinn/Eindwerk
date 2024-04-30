@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Http;
 use PhpParser\Node\Expr\Throw_;
@@ -14,39 +15,46 @@ class PartController extends Controller
     //
     public function index(Request $request)
     {
-        //check if the page query string has been set
-        if (isset($request->page)) {
-            $filter = $request->filter;
-            $order = $request->order;
-            $ordering_filter = ($order == "desc" ? "-" : "+") . "$filter";
-            $input = $request->input;
-            $page = $request->page;
-            //Catch page counts that go before the first showable page
-            if ($page < 1) {
-                route('part.view', ['page' => '1']);
-            }
-            //Grabbing a slice of data from Inventree
-            $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/.*", [
-                "ordering" => "$ordering_filter",
-                "search" => "$input",
-                "limit" => 25,
-                "offset" => ($page - 1) * 25,
-            ]);
-            isset($response) ? $parts = json_decode($response)->{"results"} : $parts = [];
-            //Catch page counts that go past last showable page
-            if ($parts == null) {
-                route('part.view', ['page' => '1']);
-            }
-            //Interchanging the category primary key for the category name
-            foreach ($parts as $part) {
-                $category_id = $part->{'category'};
-                $category_json = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/category/{$category_id}/.*");
-                $category_name = json_decode($category_json)->{"name"};
-                $part->{"category"} = $category_name;
-            }
-            return view("parts.part", compact("parts", "page", "filter", "order"));
+        // Extract parameters from the request
+        $input = $request->input('search');
+        $order = $request->input('order');
+        $order_by = $request->input('order_by');
+        $ordering = ($order == "desc" ? "-" : "+") . "$order_by";
+        $page = $request->input('page', 1); // Default to page 1 if not provided
+
+        // Define pagination parameters
+        $perPage = 25;
+        $offset = ($page - 1) * $perPage;
+
+        // Make API request with pagination parameters
+        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/", [
+            "ordering" => $ordering,
+            "search" => $input,
+            "limit" => $perPage,
+            "offset" => ($request->input('page', 1) - 1) * 10,
+        ]);
+
+        if ($response->successful()) {
+            // Parse the JSON response
+            $data = json_decode($response);
+
+            // Extract items from the response
+            $items = $data->{'results'};
+
+            // Create a LengthAwarePaginator instance to handle pagination
+            $paginator = new LengthAwarePaginator(
+                $items,
+                $data->{'count'},
+                25, // Number of items per page
+                $request->input('page', 1), // Current page
+                ['path' => $request->url(), 'query' => $request->query()]
+            );
+
+            return view('parts.part', compact('paginator', 'order_by', 'order'));
+        } else {
+            // Handle unsuccessful API response
+            return view('parts.error');
         }
-        route('part.view', ['page' => '1']);
     }
 
 
@@ -54,7 +62,7 @@ class PartController extends Controller
     {
         $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/category/");
         $categories = json_decode($response);
-        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/location/.*");
+        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/location/");
         $locations = json_decode($response);
         return view("parts.part_create", compact("categories", "locations"));
     }
@@ -74,7 +82,7 @@ class PartController extends Controller
         ]);
         try{
             // Try obtaining a token with given credentials
-            $response = Http::withToken(session('token'), 'Token')->post("http://inventree.localhost/api/part/.*", [
+            $response = Http::withToken(session('token'), 'Token')->post("http://inventree.localhost/api/part/", [
                 'category' => $request->category,
                 'name' => $request->name,
                 'IPN' => $request->ipn,
@@ -106,9 +114,9 @@ class PartController extends Controller
             $input = $request->input;
             $page = $request->page;
             $part_id = $request->id;
-            $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/$part_id/.*");
+            $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/$part_id/");
             $part = json_decode($response);
-            $stock_json = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/.*", [
+            $stock_json = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/", [
                 "name" => $part->name,
                 "limit" => 25,
                 "offset" => ($page - 1) * 25,
@@ -120,7 +128,7 @@ class PartController extends Controller
             }
             foreach ($stocks as $stock) {
                 $location_id = $stock->{'location'};
-                $location_response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/location/{$location_id}/.*");
+                $location_response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/location/{$location_id}/");
                 $location_decoded = json_decode($location_response);
                 if(is_array($location_decoded)){
                     $stock->{"location"} = $location_decoded[0]->{"name"};
@@ -140,9 +148,9 @@ class PartController extends Controller
     //Showing add part stock view
     function add_stock_view(Request $request){
         $part_id = $request->id;
-        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/location/.*");
+        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/location/");
         $locations = json_decode($response);
-        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/$part_id/.*");
+        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/part/$part_id/");
         $part = json_decode($response);
         $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/status/");
         $statuses = json_decode($response)->values;
@@ -166,7 +174,7 @@ class PartController extends Controller
         ]);
         try{
             // Try obtaining a token with given credentials
-            $response = Http::withToken(session('token'), 'Token')->post("http://inventree.localhost/api/stock/.*", [
+            $response = Http::withToken(session('token'), 'Token')->post("http://inventree.localhost/api/stock/", [
                 "part" => $request->id,
                 "supplier_part" => $request->supplier_part,
                 "stock_location" => $request->stock_location,

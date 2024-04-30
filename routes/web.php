@@ -26,42 +26,43 @@ use Illuminate\Support\Facades\Route;
 
 //TODO CATCHALL reroute if not authenticated.
 Route::get('/', function () {
-    return view('login');
+    route('login');
 });
-
-
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::middleware(['custom-auth'])->group(function () {
+    // Routes that require authentication
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/category', [CategoryController::class, 'index']);
-Route::get('/category/create', [CategoryController::class, 'create']);
-Route::post('/category/create', [CategoryController::class, 'category_create']);
-
-Route::get('/location', [LocationController::class, 'index']);
-Route::get('/location/create', [LocationController::class, 'create']);
-Route::post('/location/create', [LocationController::class, 'location_create']);
-
-Route::get('/build_orders', [BuildOrderController::class, 'index']);
-Route::get('/build_orders/{id}', [BuildOrderController::class, 'read']);
-Route::get('/build_orders/create', [BuildOrderController::class, 'create']);
-
-Route::get('/bill_of_material', [BomController::class, 'index']);
-Route::get('/bill_of_material/1', [BomController::class, 'read']);
-Route::get('/bill_of_material/create', [BomController::class, 'create']);
-
-Route::get('/part', [PartController::class, 'index'])->name('part.view');
-Route::get('/part/create', [PartController::class, 'create']);
-Route::post('/part/create', [PartController::class, 'part_create']);
-Route::get('/part/{id}', [PartController::class, 'read'])->name('part_details.view');
-
-Route::get('/part/{id}/add', [PartController::class, 'add_stock_view']);
-Route::post('/part/{id}/add', [PartController::class, 'add_stock']);
-
-Route::get('/part/{id}/edit', [PartController::class, 'edit']);
-Route::get('/part/{id}/delete', [PartController::class, 'delete']);
-
-Route::get('/scan', [ScanController::class, 'index']);
-Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::get('/category/create', [CategoryController::class, 'create']);
+    Route::post('/category/create', [CategoryController::class, 'category_create']);
+    
+    Route::get('/location', [LocationController::class, 'index']);
+    Route::get('/location/create', [LocationController::class, 'create']);
+    Route::post('/location/create', [LocationController::class, 'location_create']);
+    
+    Route::get('/build_orders', [BuildOrderController::class, 'index']);
+    Route::get('/build_orders/{id}', [BuildOrderController::class, 'read']);
+    Route::get('/build_orders/create', [BuildOrderController::class, 'create']);
+    
+    Route::get('/bill_of_material', [BomController::class, 'index']);
+    Route::get('/bill_of_material/1', [BomController::class, 'read']);
+    Route::get('/bill_of_material/create', [BomController::class, 'create']);
+    
+    Route::get('/part', [PartController::class, 'index'])->name('part.view');
+    Route::get('/part/create', [PartController::class, 'create']);
+    Route::post('/part/create', [PartController::class, 'part_create']);
+    Route::get('/part/{id}', [PartController::class, 'read'])->name('part_details.view');
+    
+    Route::get('/part/{id}/add', [PartController::class, 'add_stock_view']);
+    Route::post('/part/{id}/add', [PartController::class, 'add_stock']);
+    
+    Route::get('/part/{id}/edit', [PartController::class, 'edit']);
+    Route::get('/part/{id}/delete', [PartController::class, 'delete']);
+    
+    Route::get('/scan', [ScanController::class, 'index']);
+    Route::get('/orders', [OrderController::class, 'index']);
+});

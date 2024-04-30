@@ -10,7 +10,7 @@ class LocationController extends Controller
 {
     //
     public function index(){
-        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/location/.*");
+        $response = Http::withToken(session('token'), 'Token')->get("http://inventree.localhost/api/stock/location/");
         $locations = json_decode($response);
         return view("locations.location" ,compact("locations"));
     }
@@ -26,7 +26,7 @@ class LocationController extends Controller
         ]);
         try{
             // Try obtaining a token with given credentials
-            $response = Http::withToken(session('token'), 'Token')->post("http://inventree.localhost/api/stock/location/.*", [
+            $response = Http::withToken(session('token'), 'Token')->post("http://inventree.localhost/api/stock/location/", [
                 'name' => $request->name,
                 'description' => $request->description,
             ]);

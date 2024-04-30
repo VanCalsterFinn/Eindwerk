@@ -24,13 +24,16 @@ class LoginController extends Controller
             'username' => 'required|max:20',
             'password' => 'required|max:20',
         ]);
-        try{
+        try{   
+            $username = $validated['username'];
+            $password = $validated['password'];
             // Try obtaining a token with given credentials
-            $response = Http::withBasicAuth($validated['username'], $validated['password'])->get("http://inventree.localhost/api/user/token/");
+            $response = Http::withBasicAuth($username, $password)->get("http://inventree.localhost/api/user/token/");
             $obj = json_decode($response);
+            // dd($obj);
             $token = $obj->{'token'};
             $request->session()->put('token', $token);
-            return redirect("dashboard");
+            return redirect()->route('dashboard');
         } catch (Throwable $e) {
             report($e);     
             return redirect("login");
