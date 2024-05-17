@@ -37,91 +37,109 @@
             </a>
         </div>
 
-
-
-        <div class="flex justify-center flex-col">
-            <div class="flex justify-center items-center flex-col">
-                {{-- This is the header container for the custom table --}}
-                <div class="flex justify-center items-center flex-col">
-                    <ul class="flex justify-between items-center gap-14 p-3 mt-4 bg-blue-200 rounded font-bold">
-                        <li class="flex justify-between items-center w-36">
-                            <p>Part</p>
-                            @if ($order_by == 'name' && $order == 'desc')
-                                <img src="/icons8-sort-down-30.png" alt="" class="w-6 h-6">
-                            @elseif ($order_by == 'name' && $order == 'asc')
-                                <img src="/icons8-sort-up-30.png" alt="" class="w-6 h-6">
-                            @else
-                                <img src="/icons8-sort-48.png" alt="" class="w-6 h-6">
-                            @endif
-                        </li>
-                        <li class="flex justify-between items-center w-24">
-                            <p>IPN</p>
-                            @if ($order_by == 'IPN' && $order == 'desc')
-                                <img src="/icons8-sort-down-30.png" alt="" class="w-6 h-6">
-                            @elseif ($order_by == 'IPN' && $order == 'asc')
-                                <img src="/icons8-sort-up-30.png" alt="" class="w-6 h-6">
-                            @else
-                                <img src="/icons8-sort-48.png" alt="" class="w-6 h-6">
-                            @endif
-                        </li>
-                        <li class="w-60">
-                            <p>Description</p>
-                        </li>
-                        <li class="flex justify-between items-center w-36">
-                            <p>Category</p>
-                            @if ($order_by == 'category' && $order == 'desc')
-                                <img src="/icons8-sort-down-30.png" alt="" class="w-6 h-6">
-                            @elseif ($order_by == 'category' && $order == 'asc')
-                                <img src="/icons8-sort-up-30.png" alt="" class="w-6 h-6">
-                            @else
-                                <img src="/icons8-sort-48.png" alt="" class="w-6 h-6">
-                            @endif
-                        </li>
-                        <li class="flex justify-between items-center w-40">
-
-                            <p>Stock</p>
-                            @if ($order_by == 'in_stock' && $order == 'desc')
-                                <img src="/icons8-sort-down-30.png" alt="" class="w-6 h-6">
-                            @elseif ($order_by == 'in_stock' && $order == 'asc')
-                                <img src="/icons8-sort-up-30.png" alt="" class="w-6 h-6">
-                            @else
-                                <img src="/icons8-sort-48.png" alt="" class="w-6 h-6">
-                            @endif
-
-                        </li>
-                        <li class="w-36">
-                            <p>Price Range</p>
-                        </li>
-                        <li class="flex justify-between items-center w-36">
-                            <p>Last Stocktake</p>
-                            @if ($order_by == 'last_stocktake' && $order == 'desc')
-                                <img src="/icons8-sort-down-30.png" alt="" class="w-6 h-6">
-                            @elseif ($order_by == 'last_stocktake' && $order == 'asc')
-                                <img src="/icons8-sort-up-30.png" alt="" class="w-6 h-6">
-                            @else
-                                <img src="/icons8-sort-48.png" alt="" class="w-6 h-6">
-                            @endif
-                        </li>
-                    </ul>
-
-                    {{-- Part row --}}
-
-                    <!-- Display paginated items -->
+        {{-- Parts table view --}}
+        <div class="flex justify-center flex-col items-center px-4 sm:px-8 max-w-3xl my-8 min-w-full rounded-lg">
+            <table class="min-w-full leading-normal">
+                <thead>
+                    <tr>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-slate-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex justify-between items-center">
+                                <p>Part</p>
+                                @if ($order_by == 'name' && $order == 'desc')
+                                    <img src="/icons8-sort-down-30.png" alt="" class="ml-4 w-6 h-6">
+                                @elseif ($order_by == 'name' && $order == 'asc')
+                                    <img src="/icons8-sort-up-30.png" alt="" class="ml-4 w-6 h-6">
+                                @else
+                                    <img src="/icons8-sort-48.png" alt="" class="ml-4 w-6 h-6">
+                                @endif
+                            </div>
+                        </th>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-slate-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex justiy-between items-center">
+                                <p>IPN</p>
+                                @if ($order_by == 'IPN' && $order == 'desc')
+                                    <img src="/icons8-sort-down-30.png" alt="" class="ml-4 w-6 h-6">
+                                @elseif ($order_by == 'IPN' && $order == 'asc')
+                                    <img src="/icons8-sort-up-30.png" alt="" class="ml-4 w-6 h-6">
+                                @else
+                                    <img src="/icons8-sort-48.png" alt="" class="ml-4 w-6 h-6">
+                                @endif
+                            </div>
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-slate-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                            style="min-width: 120px;">
+                            <div class="flex justiy-between items-center">
+                                Description
+                            </div>
+                        </th>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-slate-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex justiy-between items-center">
+                                <p>Category</p>
+                                @if ($order_by == 'category' && $order == 'desc')
+                                    <img src="/icons8-sort-down-30.png" alt="" class="ml-4 w-6 h-6">
+                                @elseif ($order_by == 'category' && $order == 'asc')
+                                    <img src="/icons8-sort-up-30.png" alt="" class="ml-4 w-6 h-6">
+                                @else
+                                    <img src="/icons8-sort-48.png" alt="" class="ml-4 w-6 h-6">
+                                @endif
+                            </div>
+                        </th>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-slate-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex justiy-between items-center">
+                                <p>Stock</p>
+                                @if ($order_by == 'in_stock' && $order == 'desc')
+                                    <img src="/icons8-sort-down-30.png" alt="" class="ml-4 w-6 h-6">
+                                @elseif ($order_by == 'in_stock' && $order == 'asc')
+                                    <img src="/icons8-sort-up-30.png" alt="" class="ml-4 w-6 h-6">
+                                @else
+                                    <img src="/icons8-sort-48.png" alt="" class="ml-4 w-6 h-6">
+                                @endif
+                            </div>
+                        </th>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-slate-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex justiy-between items-center">
+                                Price Range
+                            </div>
+                        </th>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-slate-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex justiy-between items-center">
+                                <p>Last Stocktake</p>
+                                @if ($order_by == 'last_stocktake' && $order == 'desc')
+                                    <img src="/icons8-sort-down-30.png" alt="" class="w-6 h-6">
+                                @elseif ($order_by == 'last_stocktake' && $order == 'asc')
+                                    <img src="/icons8-sort-up-30.png" alt="" class="w-6 h-6">
+                                @else
+                                    <img src="/icons8-sort-48.png" alt="" class="w-6 h-6">
+                                @endif
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
                     @if ($paginator->count() > 0)
                         @foreach ($paginator as $part)
-                            <ul class="flex justify-center items-center gap-14 p-3 border-b border-slate-200 text-sm">
-                                <li class="w-36 text-blue-700 cursor-pointer break-words"><a
-                                        href="/part/{{ $part->{'pk'} }}?page=1">{{ $part->{'full_name'} }}</a></li>
-                                <li class="w-24 break-words">
+                            <tr>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <a href="/part/{{ $part->{'pk'} }}?page=1">{{ $part->{'full_name'} }}</a>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     @if ($part->{'IPN'} != null)
                                         {{ $part->{'IPN'} }}
                                     @else
                                         -
                                     @endif
-                                </li>
-                                <li class="w-60 break-words">{{ $part->{'description'} }}</li>
-                                <li class="w-36 break-words text-sm">{{ $part->{'category'} }}</li>
-                                <li class="w-40 flex justify-between gap-4 items-center break-words">
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    {{ $part->description }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $part->category }}
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     {{ $part->{'in_stock'} }}
                                     @if ($part->{'unallocated_stock'} > 0)
                                         <p
@@ -129,33 +147,31 @@
                                             Available: {{ $part->{'unallocated_stock'} }}
                                         </p>
                                     @endif
-                                </li>
-                                <li class="w-36 break-words">
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     @if ($part->{'pricing_min'} != null && $part->{'pricing_max'} != null)
                                         <p>${{ number_format($part->{'pricing_min'}, 2, '.', ',') }} -
                                             ${{ number_format($part->{'pricing_max'}, 2, '.', ',') }}</p>
                                     @else
                                         -
                                     @endif
-                                </li>
-                                <li class="w-36 break-words">
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     @if ($part->{'last_stocktake'} != null)
                                         {{ $part->{'last_stocktake'} }}
                                     @else
                                         -
                                     @endif
-                                </li>
-                            </ul>
+                                </td>
+                            </tr>
                         @endforeach
-                        <!-- Display pagination links -->
-                        <div class="flex justify-center items-center w-full py-4 ">
-                            {{ $paginator->links() }}
-                        </div>
                     @else
                         <p>No items found.</p>
                     @endif
-                </div>
-
+                </tbody>
+            </table>
+            <div class="mt-4">
+                {{ $paginator->links() }} <!-- Laravel pagination links -->
             </div>
         </div>
     </div>
